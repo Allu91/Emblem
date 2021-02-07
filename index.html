@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emblem</title>
+    <script src="gsap.min.js"></script>
+    <script src="DrawSVGPlugin.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <object type="image/svg+xml" data="emblem.svg" class="logo" id="emblem"></object>
+
+    <!-- <button id="replay">REPLAY<svg id="playbtn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 192.01"><path fill="#dbb878" d="M152.48 109.58l-128 80A16 16 0 010 176V16A16 16 0 0124.48 2.44l128 80a16 16 0 010 27.14z"/></svg></button> -->
+
+
+
+    <script>
+
+    document.getElementById("emblem").addEventListener("load", function() {
+        var doc = this.getSVGDocument();
+
+
+    // Variables
+        var tl = new TimelineLite();
+
+        var main_ring = doc.querySelector("#main-ring");
+        var dotted_ring_outer = doc.querySelector("#dotted-ring-outer");
+        var dotter_ring_inner1 = doc.querySelector("#dotted-ring-inner1");
+        var dotter_ring_inner2 = doc.querySelector("#dotted-ring-inner2");
+
+        var globe_design = doc.querySelector("#Globe-design");
+        var globe_paths = doc.querySelectorAll('#Globe-design > path');
+        var inner_lines = doc.querySelectorAll("#Inner-Lines > line");
+        var inner_line_circle = doc.querySelector("#inner-line-circle");
+        var triangles = doc.querySelectorAll("#Triangles > polygon");
+        var swirls = doc.querySelectorAll("#Swirls > path");
+        var thorns_circles1 = doc.querySelectorAll("#Thorns > .st1");
+        var thorns_circles2 = doc.querySelectorAll("#Thorns > .st0");
+        var thorns_thorn = doc.querySelectorAll("#Thorns > .thorn");
+        var center_circle = doc.querySelector("#Thorns > #center_circle");
+        var letter = doc.querySelector("#PalatinoLinotype");
+        // var tl_globe_paths = new TimelineMax({delay: 1.8});
+
+
+    // Rotations
+        TweenMax.from([dotted_ring_outer, dotter_ring_inner1], 8, {rotation: 50, transformOrigin:"50% 50%"});
+        TweenMax.from(dotter_ring_inner2, 8, {rotation: -50, transformOrigin:"50% 50%"});
+        TweenMax.from(globe_design, 8, {rotation: -50, transformOrigin:"50% 50%"});
+
+    // Timeline
+        tl.add(TweenMax.from(main_ring, 3, {ease: Power2.easeInOut, drawSVG: "50% 50%"}), "+=0.0");
+        tl.add(TweenMax.from(dotted_ring_outer, 2.5, {opacity: 0}), "-=1.8");
+        tl.add(TweenMax.from(dotter_ring_inner1, 0.7, {opacity: 0}), "-=1.3");
+        tl.add(TweenMax.from(dotter_ring_inner2, 0.7, {opacity: 0}), "-=1.0");
+        // Globe paths
+        for (var i = 0; i < globe_paths.length; i++) {
+            TweenMax.from(globe_paths[i], 2.5, {ease: Power2.easeOut, drawSVG: 0, delay: 1.4});
+        }
+        // Inner circle and lines
+        tl.add(TweenMax.from(inner_line_circle, 0.4, {opacity: 0}), "-=0.7");
+        for (var i = 0; i < inner_lines.length; i++) {
+            TweenMax.from(inner_lines[i], 0.8, {ease: Power2.easeOut, drawSVG: 0, delay: 3.0});
+        }
+        // Triangles
+        for (var i = 0; i < triangles.length; i++) {
+            TweenMax.from(triangles[i], 0.6, {scale: 0, transformOrigin:"50% 50%", delay: 3.2});
+        }
+        // Swirls
+        for (var i = 0; i < swirls.length; i++) {
+            TweenMax.from(swirls[i], 0.3, {opacity: 0, delay: 3.6});
+            TweenMax.from(swirls[i], 1.4, {drawSVG: "50% 50%", delay: 3.6}, {drawSVG: "0% 100%"});
+        }
+        // Thorns
+        tl.add(TweenMax.from(thorns_thorn, 0.7, {ease: Power2.easeOut, drawSVG: "50% 50%", delay: 0.0}, {drawSVG: "0% 100%"}), "-=0.0");
+        tl.add(TweenMax.from(thorns_circles1, 0.4, {opacity: 0, delay: 0.8}), "-=0.8");
+        tl.add(TweenMax.from(thorns_circles2, 0.5, {opacity: 0}), "-=0.1");
+        // Center circle & Letter
+        tl.add(TweenMax.from(center_circle, 1.4, {ease: Power2.easeInOut, drawSVG: "50% 50%", opacity: 0}, {drawSVG: "0% 100%"}), "-=0.6");
+        tl.add(TweenMax.from(letter, 0.8, {ease: Power2.easeInOut, opacity: 0, drawSVG: "50% 50%"}, {drawSVG: "0% 100%"}), "-=1.0");
+        tl.add(TweenMax.from(letter, 0.5, {fill: "rgba(0,0,0,0)"}), "-=0.0");
+        
+
+
+        // var replay = document.querySelector("#replay");
+
+        // replay.addEventListener("click", function(){
+        //     tl.restart();
+        // });
+
+
+
+    });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+body {
+    height: 100%;
+    background-color: #333;
+    text-align: center;
+    font-family: "Helvetica Neue", helvetica, Arial, sans-serif;
+}
+h1 {
+    color: #DBB878;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25);
+}
+#emblem {
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    max-width: 600px;
+    max-height: 600px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+#replay {
+    font-size: 1.2em;
+    color: #a8a9ad;
+    letter-spacing: 0.05em;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    transition: color 0.2s;
+}
+#replay #playbtn {
+    width: 0.55em;
+    height: 0.65em;
+    margin-left: 0.4em;
+    display: inline-block;
+    filter: saturate(0%) brightness(90%);
+    transition: filter 0.2s;
+}
+#replay:hover {
+    cursor: pointer;
+    color: #dbb878;
+}
+#replay:hover #playbtn {
+    filter: saturate(100%) brightness(100%);
+}
